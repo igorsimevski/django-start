@@ -18,6 +18,7 @@ monthly_challenges = {
     "december": "Walk for at least 12 minutes every day.",
 }
 
+
 def index(request):
     months = list(monthly_challenges.keys())
     response_data = "<ul>"
@@ -25,6 +26,7 @@ def index(request):
         response_data += f'<li><a href="{month}">{month.capitalize()}</a></li>'
     response_data += "</ul>"
     return HttpResponse(response_data)
+
 
 def monthly_challenge_by_number(request, month):
     if month < 1 or month > 12:
