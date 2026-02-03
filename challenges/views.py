@@ -15,7 +15,7 @@ monthly_challenges = {
     "september": "Walk for at least 9 minutes every day.",
     "october": "Walk for at least 10 minutes every day.",
     "november": "Walk for at least 11 minutes every day.",
-    "december": "Walk for at least 12 minutes every day.",
+    "december": None,
 }
 
 
