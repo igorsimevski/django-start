@@ -29,5 +29,9 @@ def monthly_challenge_by_number(request, month):
 
 def monthly_challenge(request, month):
 
-    challenge_text = monthly_challenges.get(month, "This month is not supported.")
-    return HttpResponse(challenge_text)
+    try:
+        challenge_text = monthly_challenges.get(month, "This month is not supported.")
+        response_data = f"<h1>{month.capitalize()}</h1><p>{challenge_text}</p>"
+        return HttpResponse(response_data)
+    except KeyError:
+        return HttpResponseNotFound("This month is not supported.")
