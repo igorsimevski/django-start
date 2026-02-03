@@ -5,5 +5,39 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Welcome to My Blog</h1>
+  <header>
+    <h1><a href="">My Blog</a></h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="">All Posts</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="welcome">
+    <header>
+      <img src="" alt="Igor - Author of Blog" />
+      <h2>Igor's Blog</h2>
+    </header>
+    <p>Welcome to my blog where I share insights on web development, programming, and technology trends. Stay tuned for regular updates!</p>
+  </section>
+  <section>
+    <h2>Latest Thoughts</h2>
+    <ul>
+      <li>
+        <article class="post">
+          <img src="" alt="Hiking Image" />
+          <div class="post__content"></div>
+          <h3><a href="">Moutaing hiking</a></h3>
+          <p>Exploring the mountains is a refreshing experience that rejuvenates the mind and body. In this post, I share my recent hiking adventure and the breathtaking views I encountered along the way.</p>
+        </article>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>About Me</h2>
+    <p>Hi, I'm Igor, a passionate web developer and tech enthusiast. I love sharing my knowledge and experiences through this blog. When I'm not coding, you can find me hiking or exploring new technologies.</p>
+  </section>
 {% endblock %}
