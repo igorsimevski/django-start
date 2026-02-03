@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
-from django.template.loader import render_to_string
 
 
 monthly_challenges = {
@@ -41,7 +40,7 @@ def monthly_challenge(request, month):
 
     try:
         challenge_text = monthly_challenges.get(month, "This month is not supported.")
-        response_data = render_to_string("challenges/challenge.html")
+        response_data = render(request, "challenges/challenge.html")
 
         return HttpResponse(response_data)
     except KeyError:
