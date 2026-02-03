@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  This Post Title
+  {{post.title}}
 {% endblock %}
 
 {% block css_files %}
@@ -11,24 +11,13 @@
 
 {% block content %}
   <section id="summary">
-    <h2>Post Title</h2>
+    <h2>{{post.title}}</h2>
     <article>
       <img src="{% static 'blog/images/mountains.jpg' %}" alt="Mountain Hiking" />
-      <address>Posted by Igor on January 1, 2024</address>
-      <div> Last updated on <time>January 5, 2026</time> </div>
+      <address>Posted by {{post.author}}</address>
+      <div> Last updated on <time>{{post.date|date:"D, d M Y"}}</time> </div>
   </section>
   <main>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu. Proin ac consequat arcu. Maecenas at dui ut lacus dictum fermentum. Nullam vel sem at odio varius tincidunt. Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ligula.
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu. Proin ac consequat arcu. Maecenas at dui ut lacus dictum fermentum. Nullam vel sem at odio varius tincidunt. Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ligula.
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu. Proin ac consequat arcu. Maecenas at dui ut lacus dictum fermentum. Nullam vel sem at odio varius tincidunt. Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ligula.
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu. Proin ac consequat arcu. Maecenas at dui ut lacus dictum fermentum. Nullam vel sem at odio varius tincidunt. Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ligula.
-    </p>
+    {{post.content|linebreaks}}
   </main>
 {% endblock %}
