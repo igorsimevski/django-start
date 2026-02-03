@@ -10,12 +10,6 @@
 {% endblock %}
 
 {% block content %}
-  <header>
-    <h1><a href="">My Blog</a></h1>
-    <nav>
-      <a href="">All Posts</a>
-    </nav>
-  </header>
 
   <section id="welcome">
     <header>
@@ -27,16 +21,7 @@
   <section id="latest-posts">
     <h2>Latest Thoughts</h2>
     <ul>
-      <li>
-        <article class="post">
-          <a href="">
-            <img src="{% static "blog/images/mountains.jpg" %}" alt="Hiking Image" />
-            <div class="post__content"></div>
-            <h3>Moutaing hiking</h3>
-            <p>Exploring the mountains is a refreshing experience that rejuvenates the mind and body. In this post, I share my recent hiking adventure and the breathtaking views I encountered along the way.</p>
-          </a>
-        </article>
-      </li>
+      {% include "blog/includes/post.html" %}
     </ul>
   </section>
   <section id="about">
