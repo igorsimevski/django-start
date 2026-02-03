@@ -40,7 +40,11 @@ def monthly_challenge(request, month):
 
     try:
         challenge_text = monthly_challenges.get(month, "This month is not supported.")
-        response_data = render(request, "challenges/challenge.html", {"challenge_text": challenge_text, "month": month.capitalize()})
+        response_data = render(
+            request,
+            "challenges/challenge.html",
+            {"challenge_text": challenge_text, "month": month.capitalize()},
+        )
 
         return HttpResponse(response_data)
     except KeyError:
