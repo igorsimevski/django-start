@@ -2,9 +2,22 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 
+class Address(models.Model):
+    street = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+
+    def full_address(self):
+        return f"{self.street}, {self.city}, {self.state} {self.postal_code}"
+    
+    def __str__(self):
+        return self.full_address()
+
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
