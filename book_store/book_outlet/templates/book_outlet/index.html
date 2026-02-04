@@ -1,13 +1,17 @@
-{% extends "book_outlet/base.html" %}
+{% extends 'book_outlet/base.html' %}
 
 {% block title %}
-All Books
+  All Books
 {% endblock %}
 
 {% block content %}
   <ul>
     {% for book in books %}
-      <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> by {{ book.author }} - {{ book.rating }}/5</li>
+      <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> by {{ book.author }} - {{ book.rating }}/5
+      </li>
     {% endfor %}
   </ul>
+  <p>Total books: {{ total_books }}</p>
+  <p>Average rating: {{ average_rating }}</p>
 {% endblock %}
