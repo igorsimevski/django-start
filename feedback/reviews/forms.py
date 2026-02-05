@@ -13,10 +13,14 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = '__all__' # individual: ['user_name', 'review_text', 'rating']
+        fields = "__all__"  # individual: ['user_name', 'review_text', 'rating']
         # exclude = ['owner_comment']
-        labels = {
-            'user_name': "Your Name", 
-            'review_text': "Comment", 
-            'rating': "Rating"
+        labels = (
+            {"user_name": "Your Name", "review_text": "Comment", "rating": "Rating"}
+        )
+        error_messages = {
+            "user_name": {
+                "required": "Must not be empty",
+                "max_length": "Longer please 2",
+            }
         }
