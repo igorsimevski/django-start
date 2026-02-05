@@ -74,7 +74,7 @@ def start_page(request):
 
 def posts(request):
     return render(request, 'blog/all-posts.html', {
-        "all_posts": Post.objects.all().order_by("-published_date")[:3]
+        "all_posts": Post.objects.all().order_by("-published_date")
     })
 
 def post_detail(request, slug):
