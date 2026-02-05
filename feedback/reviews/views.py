@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 from .forms import ReviewForm
 from .models import Review
 
@@ -19,6 +20,14 @@ class ReviewView(View):
             return HttpResponseRedirect("/thank_you")
         return render(request, "reviews/review.html", {"form": form})
 
+class ReviewView(FormView):
+    form_class = ReviewForm
+    template_name = "reviews/review.html"
+    success_url = "/thank_you"
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
 
 def review(request):
     if request.method == "POST":
@@ -56,9 +65,9 @@ class ReviewsListView(ListView):
     model = Review
     context_object_name = "reviews"
 
-    def get_queryset(self):
-        base_query = super().get_queryset()
-        return base_query.filter(rating__lt=3)
+    # def get_queryset(self):
+    #     base_query = super().get_queryset()
+    #     return base_query.filter(rating__lt=3)
 
 
 # class SingleReviewView(TemplateView):
