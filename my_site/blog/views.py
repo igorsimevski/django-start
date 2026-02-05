@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from datetime import date
 
 from .models import Post
@@ -78,8 +78,7 @@ def posts(request):
     })
 
 def post_detail(request, slug):
-    all_posts = Post.objects.all()
-    post = next(post for post in all_posts if post["slug"] == slug)
+    detail = get_object_or_404(Post, slug=slug)
     return render(request, 'blog/post-detail.html', {
-        "post": post
+        "post": detail
     })
