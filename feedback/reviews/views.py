@@ -20,13 +20,19 @@ from .models import Review
 #             return HttpResponseRedirect("/thank_you")
 #         return render(request, "reviews/review.html", {"form": form})
 
-class ReviewView(FormView):
+# class ReviewView(FormView):
+#     form_class = ReviewForm
+#     template_name = "reviews/review.html"
+#     success_url = "/thank_you"
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
+    
+class ReviewView(CreateView):
+    model = Review
     form_class = ReviewForm
     template_name = "reviews/review.html"
     success_url = "/thank_you"
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
     
 
 def review(request):
