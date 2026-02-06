@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from datetime import date
+from django.views.generic import ListView
 
 from .models import Post
 
@@ -66,11 +67,21 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam 
 def get_date(post):
     return post["date"]
 
-def start_page(request):
-    latest_posts = Post.objects.all().order_by("-published_date")[:3]
-    return render(request, 'blog/index.html', {
-        "posts": latest_posts
-    })
+# def start_page(request):
+#     latest_posts = Post.objects.all().order_by("-published_date")[:3]
+#     return render(request, 'blog/index.html', {
+#         "posts": latest_posts
+#     })
+class StartingPageView(ListView):
+    template_name = "blog/index.html"
+    model = Post
+    ordering = ["-published_date"]
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        all_posts = super().get_queryset()
+        data = all_posts[:3]
+        return data
 
 def posts(request):
     return render(request, 'blog/all-posts.html', {
