@@ -22,7 +22,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam est praesentium, quos iste consequuntur omnis exercitationem quam velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam est praesentium, quos iste consequuntur omnis exercitationem quam velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
+        """,
     },
     {
         "slug": "programming-is-fun",
@@ -43,7 +43,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam 
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
           aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
           velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
+        """,
     },
     {
         "slug": "into-the-woods",
@@ -64,12 +64,14 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis aperiam 
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
           aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
           velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
-        """
-    }
+        """,
+    },
 ]
+
 
 def get_date(post):
     return post["date"]
+
 
 # def start_page(request):
 #     latest_posts = Post.objects.all().order_by("-published_date")[:3]
@@ -87,6 +89,7 @@ class StartingPageView(ListView):
         data = all_posts[:3]
         return data
 
+
 # def posts(request):
 #     return render(request, 'blog/all-posts.html', {
 #         "all_posts": Post.objects.all().order_by("-published_date")
@@ -96,6 +99,7 @@ class AllPostsView(ListView):
     model = Post
     ordering = ["-published_date"]
     context_object_name = "all_posts"
+
 
 # def post_detail(request, slug):
 #     detail = get_object_or_404(Post, slug=slug)
@@ -113,8 +117,9 @@ class AllPostsView(ListView):
 #         context["comment_form"] = CommentForm()
 #         return context
 
+
 class SinglePostView(View):
-    template_name = 'blog/post-detail.html'
+    template_name = "blog/post-detail.html"
     model = Post
 
     def get(self, request, slug):
@@ -122,9 +127,10 @@ class SinglePostView(View):
         context = {
             "post": post,
             "post_tags": post.tags.all(),
-            "comment_form": CommentForm()
+            "comment_form": CommentForm(),
+            "comments": post.comments.all().order_by("-id"),
         }
-        return render(request, 'blog/post-detail.html', context)
+        return render(request, "blog/post-detail.html", context)
 
     def post(self, request, slug):
         comment_form = CommentForm(request.POST)
@@ -139,7 +145,7 @@ class SinglePostView(View):
             context = {
                 "post": post,
                 "post_tags": post.tags.all(),
-                "comment_form": comment_form
+                "comment_form": comment_form,
+                "comments": Post.comments.all().order_by("-id"),
             }
-            return render(request, 'blog/post-detail.html', context)
-
+            return render(request, "blog/post-detail.html", context)
