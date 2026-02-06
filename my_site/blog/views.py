@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from datetime import date
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Post
 
@@ -83,14 +83,27 @@ class StartingPageView(ListView):
         data = all_posts[:3]
         return data
 
-def posts(request):
-    return render(request, 'blog/all-posts.html', {
-        "all_posts": Post.objects.all().order_by("-published_date")
-    })
+# def posts(request):
+#     return render(request, 'blog/all-posts.html', {
+#         "all_posts": Post.objects.all().order_by("-published_date")
+#     })
+class AllPostsView(ListView):
+    template_name = "blog/all-posts.html"
+    model = Post
+    ordering = ["-published_date"]
+    context_object_name = "all_posts"
 
-def post_detail(request, slug):
-    detail = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/post-detail.html', {
-        "post": detail,
-        "post_tags": detail.tags.all()
-    })
+# def post_detail(request, slug):
+#     detail = get_object_or_404(Post, slug=slug)
+#     return render(request, 'blog/post-detail.html', {
+#         "post": detail,
+#         "post_tags": detail.tags.all()
+#     })
+class SinglePostView(DetailView):
+    template_name = 'blog/post-detail.html'
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["post_tags"] = self.object.tags.all()
+        return context
